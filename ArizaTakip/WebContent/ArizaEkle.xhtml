@@ -1,0 +1,230 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<h:form>
+
+		<p:growl id="growl" sticky="true" showDetail="true" />
+
+		<p:wizard flowListener="#{userWizard.onFlowProcess}">
+			<p:tab id="musteri" title="Müşteri">
+				<p:panel header="Müşteri Bilgi">
+					<p:messages />
+					<h:panelGrid columns="2" columnClasses="label, value">
+
+						<h:outputText value="Adı:" />
+						<p:inputText value="#{homeBBean.ariza.musteriadi}" required="true"
+							label="adi" style="width: 275px;" />
+
+						<h:outputText value="Soyadı:" />
+						<p:inputText value="#{homeBBean.ariza.soyadi}" required="true"
+							label="soyadi" style="width: 275px;" />
+
+						<p:outputLabel for="tel" value="Telefon:" />
+						<p:inputMask id="tel" value="#{homeBBean.ariza.tel}"
+							mask="(999) 999-9999" required="true" style="width: 275px;" />
+
+
+						<h:outputText value="Adres:" />
+						<p:inputText value="#{homeBBean.ariza.adres}" label="adres"
+							style="width: 275px;" />
+
+
+
+						<h:outputText value="Skip to last: " />
+						<h:selectBooleanCheckbox value="#{userWizard.skip}" />
+					</h:panelGrid>
+				</p:panel>
+			</p:tab>
+
+
+
+
+
+			<p:tab id="ariza" title="Arıza ">
+				<p:panel header="Arıza Detay">
+					<p:messages />
+					<h:panelGrid columns="2" columnClasses="label, value">
+
+
+						<p:outputLabel for="cihaz" value="Arızalı cihazı seçin:" />
+						<p:selectOneMenu id="cihaz"
+							value="#{homeBBean.ariza.arizalicihaz}" style="width:250px">
+							<f:selectItem itemLabel="Select One" itemValue="" />
+							<f:selectItem itemLabel="Bilgisayar" itemValue="Bilgisayar" />
+							<f:selectItem itemLabel="Telefon" itemValue="Telefon" />
+							<f:selectItem itemLabel="Televizyon" itemValue="Televizyon" />
+							<f:selectItem itemLabel="Tablet" itemValue="Tablet" />
+							<f:selectItem itemLabel="Ütü" itemValue="Ütü" />
+							<f:selectItem itemLabel="Kurutma Makinesi" itemValue="Kurutma Makinesi" />
+
+						</p:selectOneMenu>
+
+						<p:outputLabel for="marka" value="Cihazın markasını seçin:" />
+						<p:selectOneMenu id="marka"
+							value="#{homeBBean.ariza.arizalimarka}" style="width:250px">
+							<f:selectItem itemLabel="Select One" itemValue="" />
+							<f:selectItem itemLabel="Casper" itemValue="Casper" />
+							<f:selectItem itemLabel="HP" itemValue="HP" />
+							<f:selectItem itemLabel="ASUS" itemValue="ASUS" />
+							<f:selectItem itemLabel="Arçelik" itemValue="Arçelik" />
+							<f:selectItem itemLabel="Lenovo" itemValue="Lenovo" />
+							<f:selectItem itemLabel="Bosch" itemValue="Bosch" />
+						</p:selectOneMenu>
+
+
+						<p:outputLabel for="tip" value="Arızanın birimini seçin:" />
+						<p:selectOneMenu id="tip" value="#{homeBBean.ariza.arizalibirim}"
+							style="width:250px">
+							<f:selectItem itemLabel="Select One" itemValue="" />
+							<f:selectItem itemLabel="SD Kart" itemValue="SD Kart" />
+							<f:selectItem itemLabel="Harddisk" itemValue="Harddisk" />
+							<f:selectItem itemLabel="Klavye" itemValue="Klavye" />
+							<f:selectItem itemLabel="Motor" itemValue="Motor" />
+							<f:selectItem itemLabel="Ekran" itemValue="Ekran" />
+
+						</p:selectOneMenu>
+
+
+
+
+
+						<h:outputText value="Skip to last: " />
+						<h:selectBooleanCheckbox value="#{userWizard.skip}" />
+					</h:panelGrid>
+				</p:panel>
+			</p:tab>
+
+
+
+
+			<p:tab id="date" title="Tarih">
+				<p:panel header="Tarih Detay">
+					<p:messages />
+					<h:panelGrid columns="2" columnClasses="label, value">
+
+						<p:outputLabel for="gelis" value="Geliş Tarihi:" />
+						<p:calendar id="gelis" value="#{homeBBean.ariza.alisTarihi}"
+							effect="fold" />
+
+						<p:outputLabel for="teslim" value="Teslim Tarihi:" />
+						<p:calendar id="teslim" value="#{homeBBean.ariza.teslimTarihi}"
+							effect="fold" />
+						<p:growl id="Boolean" />
+
+						<h:panelGrid columns="2" style="margin-bottom:10px"
+							cellpadding="5">
+							<h:outputText value="Teslim edilmedi: " />
+							<p:selectBooleanCheckbox value="#{homeBBean.ariza.teslimAlindi}" />
+
+							<h:outputText value="Teslim edildi: " />
+							<p:selectBooleanCheckbox value="#{homeBBean.ariza.teslimAlindi}">
+
+							</p:selectBooleanCheckbox>
+						</h:panelGrid>
+					</h:panelGrid>
+				</p:panel>
+
+			</p:tab>
+
+
+
+			<p:tab id="confirm" title="Genel">
+				<p:panel header="Girilen Bilgiler">
+					<h:panelGrid id="confirmation" columns="3"
+						columnClasses="grid,grid,grid">
+
+						<h:panelGrid columns="2" columnClasses="label, value">
+
+							<h:outputText value="Adı:" />
+							<h:outputText value="#{homeBBean.ariza.musteriadi}"
+								styleClass="outputLabel" />
+
+							<h:outputText value="Soyadı:" />
+							<h:outputText value="#{homeBBean.ariza.soyadi}"
+								styleClass="outputLabel" />
+
+							<h:outputText value="Telefon:" />
+							<h:outputText value="#{homeBBean.ariza.tel}"
+								styleClass="outputLabel" />
+
+							<h:outputText value="Adres:" />
+							<h:outputText value="#{homeBBean.ariza.adres}"
+								styleClass="outputLabel" />
+
+
+						</h:panelGrid>
+
+
+
+						<h:panelGrid columns="2" columnClasses="label, value">
+							<h:outputText value="Arızalı cihaz: " />
+							<h:outputText value="#{homeBBean.ariza.arizalicihaz}"
+								styleClass="outputLabel" />
+
+							<h:outputText value="Markası: " />
+							<h:outputText value="#{homeBBean.ariza.arizalimarka}"
+								styleClass="outputLabel" />
+
+							<h:outputText value="Arızalı birim: " />
+							<h:outputText value="#{homeBBean.ariza.arizalibirim}"
+								styleClass="outputLabel" />
+
+
+						</h:panelGrid>
+
+
+
+
+
+
+						<h:panelGrid columns="2" columnClasses="label, value">
+							<h:outputText value="Alış tarihi: " />
+							<h:outputText value="#{homeBBean.ariza.alisTarihi}"
+								styleClass="outputLabel" />
+
+							<h:outputText value="Teslim tarihi: " />
+							<h:outputText value="#{homeBBean.ariza.teslimTarihi}"
+								styleClass="outputLabel" />
+
+
+							<h:outputText value="Teslim durumu: " />
+							<h:outputText value="#{homeBBean.ariza.teslimAlindi}"
+								styleClass="outputLabel" />
+
+
+							<h:outputText />
+							<h:outputText />
+
+
+						</h:panelGrid>
+					</h:panelGrid>
+					<p:commandButton value="Kaydet"
+						actionListener="#{homeBBean.olustur}" update="growl"
+						process="@this" />
+					<p:outputLabel></p:outputLabel>
+					<p:commandButton action="Menu.xhtml" icon="ui-icon-disk"
+						value="Menüye dön"></p:commandButton>
+
+
+
+
+				</p:panel>
+
+			</p:tab>
+
+
+		</p:wizard>
+
+
+
+
+	</h:form>
+</h:body>
+</html>

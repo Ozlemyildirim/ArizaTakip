@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+	<CENTER>
+
+		<div style="align: center">
+			<h:form id="userForm">
+				<p:growl id="userr" showDetail="true" life="3000" sticky="true" />
+				<p:panel header="Kullanıcı Kaydı" style="width: 450px;">
+
+					<h:panelGrid id="userPanel" columns="2">
+
+						<h:outputText value="Kullanıcı adı:" />
+
+						<p:inputText id="username" value="#{homeVBean.kullanici.username}"
+							style="width: 200px;" ></p:inputText>
+
+
+						<p:spacer></p:spacer>
+
+						<p:message for="username"></p:message>
+
+						<h:outputText value="Şifre:" />
+
+						<p:password id="password" value="#{homeVBean.kullanici.password}" 
+						
+							feedback="false" style="width: 200px;" update=":userForm:userPanel"></p:password>
+
+						<p:spacer></p:spacer>
+
+						<p:message for="password"></p:message>
+
+						<p:spacer></p:spacer>
+
+
+						<p:commandButton action="#{homeVBean.ekle}" value="Kaydol" 
+							update="userForm" ajax="true" style="width: 130px;"  ></p:commandButton>
+					<p:outputLabel></p:outputLabel>
+				<p:commandButton action="AnaSayfa.xhtml"
+					icon="ui-icon-disk"  value="Geri" style="width: 130px;" ></p:commandButton>
+
+				<p:outputLabel value="#{homeVBean.mesaj}"></p:outputLabel>
+
+	  
+					</h:panelGrid>
+					
+				</p:panel>
+			</h:form>
+								
+						
+	
+		</div>
+	</CENTER>
+
+</h:body>
+</html>

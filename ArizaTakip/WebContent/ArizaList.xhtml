@@ -1,0 +1,165 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+	<h:form id="frmAriza">
+		<p:growl id="message" autoUpdate="true" showDetail="true" life="5000"
+			showSummary="true"></p:growl>
+
+		<h:panelGrid id="ariza">
+
+			<p:dataTable id="tblAriza" var="item" value="#{homeBBean.arizaList}"
+				rows="10" widgetVar="ListTable" emptyMessage="Kayıt bulunamadı.."
+				filteredValue="#{homeBBean.filteredList}" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="4,8,12">
+
+				<f:facet name="header"> ARIZA LİSTESİ
+				
+            <p:outputPanel>
+						<h:outputText value="Tüm tabloda arayın: " />
+						<p:inputText id="globalFilter" onkeyup="PF('ListTable').filter()"
+							style="width:150px" placeholder=".." />
+					</p:outputPanel>
+
+				</f:facet>
+
+
+				<p:column headerText="Arıza Id" filterBy="#{item.id}">
+					<h:outputText value="#{item.id}" />
+				</p:column>
+
+				<p:column headerText="Müşteri adı" filterBy="#{item.musteriadi}">
+					<h:outputText value="#{item.musteriadi}" />
+				</p:column>
+
+
+				<p:column headerText="Müşteri soyadı" filterBy="#{item.soyadi}">
+					<h:outputText value="#{item.soyadi}" />
+				</p:column>
+
+
+				<p:column headerText="Arızalı Cihaz" filterBy="#{item.arizalicihaz}">
+					<h:outputText value="#{item.arizalicihaz}" />
+				</p:column>
+
+
+				<p:column headerText="Markası" filterBy="#{item.arizalimarka}">
+					<h:outputText value="#{item.arizalimarka}" />
+				</p:column>
+
+
+				<p:column headerText="Birimi" filterBy="#{item.arizalibirim}">
+					<h:outputText value="#{item.arizalibirim}" />
+				</p:column>
+
+
+				<p:column headerText="Geliş Tarihi" filterBy="#{item.alisTarihi}">
+					<h:outputText value="#{item.alisTarihi}" />
+
+				</p:column>
+
+
+
+				<p:column headerText="Teslim Tarihi" filterBy="#{item.teslimTarihi}">
+					<h:outputText value="#{item.teslimTarihi}" />
+				</p:column>
+
+
+
+				<p:column headerText="Teslim durumu" filterBy="#{item.teslimAlindi}">
+					<h:outputText value="#{item.teslimAlindi}" />
+				</p:column>
+
+
+
+				<p:column headerText="Sil">
+					<p:commandButton value="Sil"
+						actionListener="#{homeBBean.sil(item.id)}" icon="ui-icon-trash"
+						update=":frmAriza"></p:commandButton>
+				</p:column>
+
+
+				<p:column headerText="Güncelle">
+					<p:commandButton value="Güncelle"
+						actionListener="#{homeBBean.duzenle(item.id)}"
+						icon="ui-icon-pencil"
+						update=":frmAriza:dlgAriza,:frmAriza:message"
+						oncomplete="PF('dlgAriza').show();"></p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+
+
+
+			<p:row>
+				<p:outputLabel></p:outputLabel>
+				<p:commandButton action="Menu.xhtml" icon="ui-icon-disk"
+					value="Menüye dön"></p:commandButton>
+			</p:row>
+
+		</h:panelGrid>
+
+		<p:dialog id="dlgAriza" widgetVar="dlgAriza" closable="true"
+			header="Kayıt güncelle" modal="true">
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Müşteri Adı :"></p:outputLabel>
+				<p:inputText value="#{homeBBean.ariza.musteriadi}"></p:inputText>
+
+				<p:outputLabel value="Müşteri Soyadı :"></p:outputLabel>
+				<p:inputText value="#{homeBBean.ariza.soyadi}"></p:inputText>
+
+				<p:outputLabel value="Cihaz :"></p:outputLabel>
+				<p:inputText value="#{homeBBean.ariza.arizalicihaz}"></p:inputText>
+
+				<p:outputLabel value="Marka:"></p:outputLabel>
+				<p:inputText value="#{homeBBean.ariza.arizalimarka}"></p:inputText>
+
+				<p:outputLabel value="Birim :"></p:outputLabel>
+				<p:inputText value="#{homeBBean.ariza.arizalibirim}"></p:inputText>
+
+				<p:outputLabel value="Geliş Tarihi:" />
+				<p:calendar id="button" value="#{homeBBean.ariza.alisTarihi}"
+					showOn="button" />
+
+				
+				<p:outputLabel value="Teslim Tarihi:" />
+				<p:calendar id="teslim" value="#{homeBBean.ariza.teslimTarihi}"
+					showOn="button" />
+		  
+                  <p:outputLabel value="Teslim Durumu:" />
+
+						<h:panelGrid columns="2" style="margin-bottom:10px"
+							cellpadding="5">
+							<h:outputText value="Teslim edilmedi: " />
+							<p:selectBooleanCheckbox value="#{homeBBean.ariza.teslimAlindi}" />
+
+							<h:outputText value="Teslim edildi: " />
+							<p:selectBooleanCheckbox value="#{homeBBean.ariza.teslimAlindi}">
+
+							</p:selectBooleanCheckbox>
+						</h:panelGrid>
+
+
+				<f:facet name="footer">
+					<p:commandButton value="Kaydet" process="@form"
+						action="#{homeBBean.olustur}"
+						update="frmAriza:tblAriza,:frmAriza:message"
+						oncomplete="PF('dlgAriza').hide();"></p:commandButton>
+				</f:facet>
+			</p:panelGrid>
+		</p:dialog>
+
+
+	</h:form>
+
+
+</h:body>
+</html>

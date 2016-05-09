@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+
+
+
+	<h:form id="tipForm">
+
+		<p:panelGrid columns="2" id="pnlK">
+			<f:facet name="header">
+				Cihaz Markası Ekleyin..
+			</f:facet>
+
+			<p:row>
+				<p:outputLabel value="Arıza Birimi :"></p:outputLabel>
+				<p:inputText value="#{homeBean.arizaTip.arizatipi}"></p:inputText>
+			</p:row>
+			<p:row>
+
+				<p:outputLabel></p:outputLabel>
+				<p:commandButton actionListener="#{homeBean.yapilandir}"
+					icon="ui-icon-disk" update=":tipForm:pnlK" value="Kaydet"></p:commandButton>
+			</p:row>
+			<p:row>
+				<p:outputLabel></p:outputLabel>
+				<p:commandButton action="Menu.xhtml" icon="ui-icon-disk"
+					value="Menüye dön"></p:commandButton>
+			</p:row>
+
+
+			<p:dataTable var="item" value="#{homeBean.arizaTipList}" rows="10"
+			
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="4,8,12">>
+				
+				<p:column headerText="Id">
+					<h:outputText value="#{item.id}" />
+				</p:column>
+
+				<p:column headerText="Arıza Birimi">
+					<h:outputText value="#{item.arizatipi}" />
+				</p:column>
+
+
+				<p:column headerText="İşlemler">
+					<p:commandButton value="Sil" update=":tipForm:pnlK"
+						actionListener="#{homeBean.clear(item.id)}" icon="ui-icon-trash"></p:commandButton>
+				</p:column>
+
+
+
+			</p:dataTable>
+			
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</html>

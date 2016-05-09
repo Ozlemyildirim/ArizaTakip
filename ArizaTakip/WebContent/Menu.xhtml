@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="tr" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+
+	<h:form>
+
+
+
+		<p:megaMenu orientation="#{megaMenuView.orientation}"
+			style="margin-top:20px">
+			<p:submenu label="Arıza İşlemleri" icon="ui-icon-wrench">
+				<p:column>
+					<p:submenu label="Arıza">
+						<p:menuitem value="Ekleme işlemi" action="ArizaEkle.xhtml" />
+						<p:menuitem value="Silme işlemi" action="ArizaList.xhtml" />
+						<p:menuitem value="Arama işlemi" action="ArizaEkle.xhtml" />
+			    		<p:menuitem value="Güncelleme İşlemi" action="ArizaList.xhtml" />
+						<p:menuitem value="Listeyi Göster" action="ArizaList.xhtml" />
+
+					</p:submenu>
+				</p:column>
+
+
+			</p:submenu>
+
+			<p:submenu label="Cihaz İşlemleri" icon="ui-icon-power">
+
+				<p:column>
+					<p:submenu label="Cihaz">
+						<p:menuitem value="Ekleme/Listeleme" action="Cihaz.xhtml" />
+						<p:menuitem value="Silme işlemi" action="Cihaz.xhtml" />
+
+
+					</p:submenu>
+				</p:column>
+
+			</p:submenu>
+
+			<p:submenu label="Marka İşlemleri" icon="ui-icon-tag">
+				<p:column>
+					<p:submenu label="Marka">
+						<p:menuitem value="Ekleme/Listeleme" action="Marka.xhtml" />
+						<p:menuitem value="Silme işlemi" action="Marka.xhtml" />
+
+					</p:submenu>
+				</p:column>
+
+
+			</p:submenu>
+
+			<p:submenu label="Arıza Birimi" icon="ui-icon-contact">
+				<p:column>
+					<p:submenu label="Arıza Birimi">
+						<p:menuitem value="Ekleme/Listeleme" action="Tip.xhtml" />
+						<p:menuitem value="Silme işlemi" action="Tip.xhtml" />
+
+
+					</p:submenu>
+				</p:column>
+
+
+			</p:submenu>
+
+
+
+			<p:submenu label="Müşteri Bilgisi" icon="ui-icon-person">
+				<p:column>
+					<p:submenu label="Müşteri">
+						<p:menuitem value="Bilgi" action="Musteri.xhtml" />
+						<p:menuitem value="Silme işlemi" action="Musteri.xhtml" />
+
+
+					</p:submenu>
+				</p:column>
+
+
+			</p:submenu>
+
+
+			<p:menuitem value="Çıkış" action="#{loginBean.logOut}"
+				icon="ui-icon-close" />
+		</p:megaMenu>
+
+	</h:form>
+
+
+</h:body>
+</html>
